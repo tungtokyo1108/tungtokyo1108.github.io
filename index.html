@@ -281,6 +281,57 @@
         }
 
         /* Professional Links */
+        .profile-avatar-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-avatar img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: var(--primary-gradient);
+            padding: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--accent-gradient), var(--primary-gradient), var(--secondary-gradient), var(--accent-gradient));
+            z-index: -1;
+            opacity: 0;
+            transition: all 0.5s ease;
+            animation: rotate 8s linear infinite;
+        }
+
+        .profile-avatar:hover .avatar-ring {
+            opacity: 1;
+        }
+
+        .profile-avatar:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(100, 255, 218, 0.4);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .profile-links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -637,6 +688,18 @@
             .profile-link-card {
                 padding: 1.5rem;
             }
+
+            .profile-avatar img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .avatar-ring {
+                top: -6px;
+                left: -6px;
+                right: -6px;
+                bottom: -6px;
+            }
         }
 
         /* Scroll animations */
@@ -697,6 +760,12 @@
     <section id="professional-links" class="fade-in-section">
         <div class="section-header">
             <h2>Professional Profile</h2>
+            <div class="profile-avatar-container">
+                <div class="profile-avatar">
+                    <img src="http://tungtokyo1108.github.io/DSC00379.jpg" alt="Dang Thanh Tung" />
+                    <div class="avatar-ring"></div>
+                </div>
+            </div>
             <p>Explore my research journey, publications, and technical contributions across platforms</p>
         </div>
         <div class="profile-links-grid">
