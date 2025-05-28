@@ -280,6 +280,78 @@
             margin: 0 auto;
         }
 
+        /* Professional Links */
+        .profile-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .profile-link-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        .profile-link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-link-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .profile-link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--text-accent);
+        }
+
+        .profile-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .profile-link-card h3 {
+            color: var(--text-accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .profile-link-card p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .profile-stats {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--text-accent);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
         /* Research Grid */
         .research-grid {
             display: grid;
@@ -556,6 +628,15 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .profile-links-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .profile-link-card {
+                padding: 1.5rem;
+            }
         }
 
         /* Scroll animations */
@@ -581,6 +662,7 @@
             <div class="logo">Dang Thanh Tung</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#professional-links">Profile</a></li>
                 <li><a href="#research">Research</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#skills">Expertise</a></li>
@@ -596,7 +678,7 @@
                 <div class="subtitle">Bayesian Machine Learning × Stochastic Variational Inference</div>
                 <p>Pioneering next-generation biological computation through <strong>Bayesian Machine Learning</strong> and <strong>Stochastic Variational Inference</strong>. Published researcher building scalable solutions for the future of biotechnology, with breakthrough achievements in microbiome-multi-omics integration and phylogenetic analysis.</p>
                 <div class="cta-buttons">
-                    <a href="#research" class="btn btn-primary">Explore Research</a>
+                    <a href="#professional-links" class="btn btn-primary">View Profile</a>
                     <a href="#contact" class="btn btn-secondary">Partner With Me</a>
                 </div>
             </div>
@@ -609,6 +691,39 @@
                     <div class="code-line"><span class="comment"># Achieving 50x speedup: 2.18hrs vs 2.35 days</span></div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="professional-links" class="fade-in-section">
+        <div class="section-header">
+            <h2>Professional Profile</h2>
+            <p>Explore my research journey, publications, and technical contributions across platforms</p>
+        </div>
+        <div class="profile-links-grid">
+            <a href="https://github.com/tungtokyo1108" target="_blank" class="profile-link-card">
+                <div class="profile-icon">⚡</div>
+                <h3>GitHub</h3>
+                <p>Open source projects, code repositories, and technical implementations</p>
+                <div class="profile-stats">50+ Repositories</div>
+            </a>
+            <a href="https://sites.google.com/site/thanhtungstat/" target="_blank" class="profile-link-card">
+                <div class="profile-icon">🌐</div>
+                <h3>Academic Website</h3>
+                <p>Comprehensive research profile, publications, and academic achievements</p>
+                <div class="profile-stats">Full CV & Portfolio</div>
+            </a>
+            <a href="https://orcid.org/0000-0002-4974-9632" target="_blank" class="profile-link-card">
+                <div class="profile-icon">🎓</div>
+                <h3>ORCID</h3>
+                <p>Official researcher identifier with verified publications and citations</p>
+                <div class="profile-stats">Verified Publications</div>
+            </a>
+            <a href="https://researchmap.jp/dangthanhtung91?lang=en" target="_blank" class="profile-link-card">
+                <div class="profile-icon">📊</div>
+                <h3>ResearchMap</h3>
+                <p>Detailed research activities, collaborations, and international presence</p>
+                <div class="profile-stats">Global Network</div>
+            </a>
         </div>
     </section>
 
@@ -777,6 +892,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
             </form>
+            <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: var(--dark-card); border-radius: 10px; border: 1px solid rgba(100, 255, 218, 0.1);">
+                <p style="margin-bottom: 0.5rem; color: var(--text-accent);">Prefer direct contact?</p>
+                <a href="mailto:dangthanhtung91@vn-bml.com" style="color: var(--text-light); text-decoration: none; font-weight: 600;">dangthanhtung91@vn-bml.com</a>
+            </div>
         </div>
     </section>
 
