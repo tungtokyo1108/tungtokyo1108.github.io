@@ -1014,41 +1014,49 @@
                         <div class="content-panel active" id="bayesian">
                             <div class="bayesian-model">
                                 <div class="model-code">
-                                    <div class="code-line"><span class="comment"># Hierarchical Dirichlet Process</span></div>
+                                    <div class="code-line"><span class="comment"># I-SVVS: Integrative Stochastic Variational Variable Selection</span></div>
                                     <div class="code-line"><span class="keyword">class</span> <span class="function">BayesianMicrobiomeModel</span>:</div>
                                     <div class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>):</div>
-                                    <div class="code-line">        <span class="variable">self</span>.<span class="variable">alpha</span> = <span class="function">Gamma</span>(<span class="number">1.0</span>, <span class="number">1.0</span>)</div>
-                                    <div class="code-line">        <span class="variable">self</span>.<span class="variable">concentration</span> = <span class="function">DP</span>(<span class="variable">alpha</span>)</div>
+                                    <div class="code-line">        <span class="comment"># Prior distributions</span></div>
+                                    <div class="code-line">        <span class="variable">self</span>.<span class="variable">alpha</span> = <span class="function">Gamma</span>(<span class="number">1.0</span>, <span class="number">1.0</span>)  <span class="comment"># DP concentration</span></div>
+                                    <div class="code-line">        <span class="variable">self</span>.<span class="variable">beta</span> = <span class="function">Beta</span>(<span class="number">1.0</span>, <span class="number">1.0</span>)   <span class="comment"># Stick-breaking</span></div>
+                                    <div class="code-line">        <span class="variable">self</span>.<span class="variable">tau</span> = <span class="function">Gamma</span>(<span class="number">0.1</span>, <span class="number">0.1</span>)   <span class="comment"># Precision</span></div>
                                     <div class="code-line"></div>
-                                    <div class="code-line">    <span class="keyword">def</span> <span class="function">stochastic_vi</span>(<span class="variable">self</span>, <span class="variable">X</span>):</div>
-                                    <div class="code-line">        <span class="comment"># Stochastic Variational Inference</span></div>
-                                    <div class="code-line">        <span class="variable">q_theta</span> = <span class="function">variational_posterior</span>(<span class="variable">X</span>)</div>
-                                    <div class="code-line">        <span class="keyword">return</span> <span class="function">ELBO_optimization</span>(<span class="variable">q_theta</span>)</div>
+                                    <div class="code-line">    <span class="keyword">def</span> <span class="function">elbo</span>(<span class="variable">self</span>, <span class="variable">microbiome</span>, <span class="variable">metabolome</span>):</div>
+                                    <div class="code-line">        <span class="comment"># Evidence Lower BOund optimization</span></div>
+                                    <div class="code-line">        <span class="variable">likelihood</span> = <span class="function">log_p_x_theta</span>(<span class="variable">microbiome</span>, <span class="variable">metabolome</span>)</div>
+                                    <div class="code-line">        <span class="variable">kl_div</span> = <span class="function">KL</span>(<span class="variable">q_theta</span>, <span class="variable">p_theta</span>)</div>
+                                    <div class="code-line">        <span class="keyword">return</span> <span class="variable">likelihood</span> - <span class="variable">kl_div</span></div>
                                 </div>
                                 
                                 <div class="model-viz">
                                     <div class="formula">
-                                        <strong>Bayesian Posterior:</strong><br>
-                                        p(θ|X) ∝ p(X|θ) × p(θ)<br>
-                                        <small style="color: var(--text-accent);">Uncertainty Quantification + Feature Selection</small>
+                                        <strong>Bayes' Theorem:</strong><br>
+                                        p(θ|X) = p(X|θ) × p(θ) / p(X)<br>
+                                        <small style="color: var(--text-accent); display: block; margin-top: 0.5rem;">
+                                            posterior = likelihood × prior / evidence
+                                        </small>
+                                        <small style="color: var(--text-accent); font-size: 0.75rem;">
+                                            θ: microbiome parameters, X: multi-omics data
+                                        </small>
                                     </div>
                                     
                                     <div class="performance-metrics">
                                         <div class="metric">
                                             <div class="metric-value">10x</div>
-                                            <div class="metric-label">Faster</div>
+                                            <div class="metric-label">ELBO Convergence</div>
                                         </div>
                                         <div class="metric">
                                             <div class="metric-value">97%</div>
-                                            <div class="metric-label">Accuracy</div>
+                                            <div class="metric-label">Posterior Accuracy</div>
                                         </div>
                                         <div class="metric">
                                             <div class="metric-value">50K+</div>
-                                            <div class="metric-label">Features</div>
+                                            <div class="metric-label">Taxa Features</div>
                                         </div>
                                         <div class="metric">
-                                            <div class="metric-value">100%</div>
-                                            <div class="metric-label">Scalable</div>
+                                            <div class="metric-value">∞</div>
+                                            <div class="metric-label">Mixture Components</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1061,16 +1069,16 @@
                                 <div class="pipeline-step">
                                     <div class="step-icon">📊</div>
                                     <div class="step-content">
-                                        <h4>Multi-Omics Data Ingestion</h4>
-                                        <p>Microbiome + Metabolome + Clinical data integration</p>
+                                        <h4>Multi-Omics Data Integration</h4>
+                                        <p>Microbiome + Metabolome compositional data preprocessing</p>
                                     </div>
                                 </div>
                                 
                                 <div class="pipeline-step">
-                                    <div class="step-icon">🧠</div>
+                                    <div class="step-icon">🎯</div>
                                     <div class="step-content">
-                                        <h4>Bayesian Feature Selection</h4>
-                                        <p>Probabilistic identification of disease biomarkers</p>
+                                        <h4>Hierarchical Prior Specification</h4>
+                                        <p>Dirichlet Process priors for infinite mixture modeling</p>
                                     </div>
                                 </div>
                                 
@@ -1078,15 +1086,15 @@
                                     <div class="step-icon">⚡</div>
                                     <div class="step-content">
                                         <h4>Stochastic Variational Inference</h4>
-                                        <p>Scalable posterior approximation for real-time analysis</p>
+                                        <p>ELBO optimization with natural gradients for scalability</p>
                                     </div>
                                 </div>
                                 
                                 <div class="pipeline-step">
-                                    <div class="step-icon">🎯</div>
+                                    <div class="step-icon">🧠</div>
                                     <div class="step-content">
-                                        <h4>Clinical Decision Support</h4>
-                                        <p>Actionable insights for personalized medicine</p>
+                                        <h4>Posterior Inference & Selection</h4>
+                                        <p>Bayesian feature selection with uncertainty quantification</p>
                                     </div>
                                 </div>
                             </div>
