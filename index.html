@@ -1056,6 +1056,35 @@
             transform: translateY(0);
             visibility: visible;
         }
+        
+        /* Research imagee */
+        .research-image {
+            margin: 1rem 0;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            max-width: 280px;           /* NEW: Limits the width */
+            margin-left: auto;          /* NEW: Centers the image */
+            margin-right: auto;         /* NEW: Centers the image */
+        }
+
+        .research-image img {
+            width: 100%;
+            height: auto;
+            max-height: 160px;          /* CHANGED: Reduced from 250px to 160px */
+            object-fit: cover;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .research-image img {
+                max-height: 120px;      /* CHANGED: Reduced from 200px to 120px */
+            }
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
