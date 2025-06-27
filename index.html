@@ -19,6 +19,7 @@
             --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             --ai-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --new-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
             --dark-bg: #0a0a23;
             --dark-card: #1a1a2e;
             --text-light: #e2e8f0;
@@ -804,6 +805,52 @@
             overflow: hidden;
         }
 
+        /* NEW Project Badge Styles */
+        .research-card.newest-project {
+            border: 2px solid #ff6b6b;
+            background: linear-gradient(145deg, var(--dark-card), rgba(255, 107, 107, 0.05));
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.15);
+            animation: newProjectGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes newProjectGlow {
+            0%, 100% { 
+                box-shadow: 0 0 30px rgba(255, 107, 107, 0.15);
+                transform: translateY(0);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(255, 107, 107, 0.25);
+                transform: translateY(-3px);
+            }
+        }
+
+        .newest-badge {
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            background: var(--new-gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: badgePulse 2s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .newest-badge::before {
+            content: '✨';
+            margin-right: 5px;
+        }
+
         .research-card::before {
             content: '';
             position: absolute;
@@ -816,6 +863,17 @@
             transition: transform 0.3s ease;
         }
 
+        .research-card.newest-project::before {
+            background: var(--new-gradient);
+            transform: scaleX(1);
+            animation: borderShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes borderShimmer {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
         .research-card:hover::before {
             transform: scaleX(1);
         }
@@ -826,10 +884,23 @@
             border-color: var(--text-accent);
         }
 
+        .research-card.newest-project:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(255, 107, 107, 0.2);
+        }
+
         .research-card h3 {
             color: var(--text-accent);
             margin-bottom: 1rem;
             font-size: 1.3rem;
+        }
+
+        .research-card.newest-project h3 {
+            background: var(--new-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
         }
 
         .research-card .tech-stack {
@@ -846,6 +917,12 @@
             border-radius: 20px;
             font-size: 0.8rem;
             border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .newest-project .tech-tag {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff9999;
+            border: 1px solid rgba(255, 107, 107, 0.3);
         }
 
         /* Impact Stats */
@@ -1057,7 +1134,7 @@
             visibility: visible;
         }
         
-        /* Research imagee */
+        /* Research image */
         .research-image {
             margin: 1rem 0;
             text-align: center;
@@ -1066,15 +1143,20 @@
             border: 1px solid rgba(100, 255, 218, 0.2);
             background: rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-            max-width: 280px;           /* NEW: Limits the width */
-            margin-left: auto;          /* NEW: Centers the image */
-            margin-right: auto;         /* NEW: Centers the image */
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newest-project .research-image {
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.1);
         }
 
         .research-image img {
             width: 100%;
             height: 100%;
-            max-height: 160px;          /* CHANGED: Reduced from 250px to 160px */
+            max-height: 160px;
             object-fit: cover;
             display: block;
             transition: all 0.3s ease;
@@ -1082,7 +1164,7 @@
 
         @media (max-width: 768px) {
             .research-image img {
-                max-height: 120px;      /* CHANGED: Reduced from 200px to 120px */
+                max-height: 120px;
             }
         }
 
@@ -1139,6 +1221,12 @@
                 left: -6px;
                 right: -6px;
                 bottom: -6px;
+            }
+
+            .newest-badge {
+                font-size: 0.7rem;
+                padding: 6px 12px;
+                right: 15px;
             }
 
             /* Mobile AI Pipeline Flow */
@@ -1412,7 +1500,8 @@
             <p>Pioneering AI-driven computational methods for next-generation biological discovery</p>
         </div>
         <div class="research-grid">
-            <div class="research-card">
+            <div class="research-card newest-project">
+                <div class="newest-badge">Latest</div>
                 <h3>VBayesMM: Bayesian Neural Network Framework</h3>
                 <p><strong>Briefings in Bioinformatics 2025 <span style="background: linear-gradient(45deg, #dc2626, #b91c1c); color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.9rem; font-weight: bold;">Impact Factor: 7.9</span></strong></p>
                 <div class="research-image">
